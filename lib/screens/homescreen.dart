@@ -10,7 +10,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Container(
       // this is how we are structuring our elements on the screen
-      child: Row(
+      child: Column(
         children: <Widget>[
           RaisedButton(
             child: Text('Join Room'),
