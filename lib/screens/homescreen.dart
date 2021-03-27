@@ -11,17 +11,32 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-          decoration: BoxDecoration(
+    return Container(
+      decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("images/background.jpg"),
+                image: AssetImage("lib/images/background.jpg"),
                 fit: BoxFit.cover
             ),
         ),
+        
       // this is how we are structuring our elements on the screen
         child: Column(
+          
           children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 110.0),
+              child: Container(
+              decoration: BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("lib/images/WelcomeWindowPlus.png"),
+                fit: BoxFit.cover
+              ),
+              ),
+              height: 437,
+              width: 331,
+            ),
+            ),
+            
             RaisedButton(
               child: Text('Join Room'),
               onPressed: () {
@@ -38,7 +53,6 @@ class _HomeState extends State<Home> {
             )
           ],
         ),
-      )
     );
   }
 }
