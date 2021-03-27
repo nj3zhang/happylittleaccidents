@@ -11,18 +11,19 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // Background
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage("lib/images/background.jpg"), fit: BoxFit.cover),
-      ),
-
-      child: Column(
+    return Scaffold(
+      body: Stack(
         children: <Widget>[
+          Container(
+          decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("lib/images/background.jpg"), fit: BoxFit.cover),
+        ),
+
+        ),
           // Welcome photo
           Padding(
-            padding: const EdgeInsets.only(top: 110.0),
+            padding: const EdgeInsets.only(top: 110.0, left:46.0),
             child: Container(
               decoration: BoxDecoration(
                 image: DecorationImage(
@@ -34,24 +35,50 @@ class _HomeState extends State<Home> {
             ),
           ),
 
-          RaisedButton(
-            child: Text('Join Room'),
-            onPressed: () {
-              print('join room has been pressed');
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => JoinRoom()));
-            },
+          // Join Room
+          Padding(
+            padding: const EdgeInsets.only(top: 583.0, left:46.0),
+            child: Container(
+              child: FloatingActionButton.extended(
+                backgroundColor: Color.fromARGB(255,233,118,97),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(38)),
+                label: Text("JOIN ROOM", style: TextStyle(fontSize: 20, fontFamily: 'Roboto')),
+                elevation: 10.0,
+                onPressed: (){
+                  print('join room has been pressed');
+                  Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => JoinRoom()));
+                }
+                ),
+              height: 63,
+              width: 331,
+            ),
+           
           ),
-          RaisedButton(
-            child: Text('Create Room'),
-            onPressed: () {
-              print('create room has been pressed');
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => CreateRoom()));
-            },
+          
+          // Create Room
+          Padding(
+            padding: const EdgeInsets.only(top: 682.0, left:46.0),
+            child: Container(
+              child: FloatingActionButton.extended(
+                backgroundColor: Color.fromARGB(255,233,118,97),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(38)),
+                label: Text("CREATE ROOM", style: TextStyle(fontSize: 20, fontFamily: 'Roboto')),
+                elevation: 10.0,
+                onPressed: (){
+                  print('create room has been pressed');
+                  Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => CreateRoom()));
+                }
+                ),
+              height: 63,
+              width: 331,
+            ),
           )
+
         ],
       ),
     );
   }
 }
+
