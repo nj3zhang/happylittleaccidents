@@ -11,34 +11,47 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("images/background.jpg"),
-                fit: BoxFit.cover
+    return Container(
+      // Background
+      decoration: BoxDecoration(
+        image: DecorationImage(
+            image: AssetImage("lib/images/background.jpg"), fit: BoxFit.cover),
+      ),
+
+      child: Column(
+        children: <Widget>[
+          // Welcome photo
+          Padding(
+            padding: const EdgeInsets.only(top: 110.0),
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("lib/images/WelcomeWindowPlus.png"),
+                    fit: BoxFit.cover),
+              ),
+              height: 437,
+              width: 331,
             ),
-        ),
-      // this is how we are structuring our elements on the screen
-        child: Column(
-          children: <Widget>[
-            RaisedButton(
-              child: Text('Join Room'),
-              onPressed: () {
-                print('join room has been pressed');
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => JoinRoom()));
-              },
-            ),
-            RaisedButton(
-              child: Text('Create Room'),
-              onPressed: () {
-                print('create room has been pressed');
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateRoom()));
-              },
-            )
-          ],
-        ),
-      )
+          ),
+
+          RaisedButton(
+            child: Text('Join Room'),
+            onPressed: () {
+              print('join room has been pressed');
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => JoinRoom()));
+            },
+          ),
+          RaisedButton(
+            child: Text('Create Room'),
+            onPressed: () {
+              print('create room has been pressed');
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => CreateRoom()));
+            },
+          )
+        ],
+      ),
     );
   }
 }
