@@ -10,6 +10,14 @@ class _JoinRoomState extends State<JoinRoom> {
   Widget build(BuildContext context) {
     return Container(
       child: Text('Join'),
+
+      // create user id
+
+      //check if you can join game
+
+
+
+
     );
   }
 }

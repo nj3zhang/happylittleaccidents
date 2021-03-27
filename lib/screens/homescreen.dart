@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hla/screens/create_room.dart';
 import 'package:hla/screens/join_room.dart';
+import 'package:hla/services/roomDatabase.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -31,9 +32,16 @@ class _HomeState extends State<Home> {
             ),
             RaisedButton(
               child: Text('Create Room'),
-              onPressed: () {
+              onPressed: () async {
+                // create instance of a new room
+                final RoomDatabaseService _roomdb = RoomDatabaseService();
+                // we need to keep track of the document id
+                // we wait until the db entry is done and ask for the id to confirm
+                String gameID = await _roomdb.getRoomID();
+                print('New room created. ID: $gameID');
+
                 print('create room has been pressed');
-                Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateRoom()));
+                Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateRoom(gameID)));
               },
             )
           ],
