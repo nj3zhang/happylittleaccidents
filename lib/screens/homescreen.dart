@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hla/screens/create_room.dart';
 import 'package:hla/screens/join_room.dart';
+import 'package:hla/screens/game_page.dart';
+import 'package:flutter/services.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -10,6 +12,15 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   @override
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitDown,
+      DeviceOrientation.portraitUp,
+    ]);
+  }
+
   Widget build(BuildContext context) {
     return Container(
       // Background
@@ -34,7 +45,7 @@ class _HomeState extends State<Home> {
             ),
           ),
 
-          RaisedButton(
+          ElevatedButton(
             child: Text('Join Room'),
             onPressed: () {
               print('join room has been pressed');
@@ -42,7 +53,7 @@ class _HomeState extends State<Home> {
                   .push(MaterialPageRoute(builder: (context) => JoinRoom()));
             },
           ),
-          RaisedButton(
+          ElevatedButton(
             child: Text('Create Room'),
             onPressed: () {
               print('create room has been pressed');

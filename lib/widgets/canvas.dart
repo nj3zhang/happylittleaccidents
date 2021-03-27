@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
+import 'package:flutter/services.dart';
 
 class CanvasWidget extends StatefulWidget {
   @override
@@ -24,6 +25,10 @@ class _CanvasState extends State<CanvasWidget> {
     super.initState();
     selectedColor = Colors.black;
     strokeWidth = 2.0;
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.landscapeRight,
+    ]);
   }
 
   void selectColor() {
@@ -59,109 +64,113 @@ class _CanvasState extends State<CanvasWidget> {
     return Scaffold(
         body: Stack(
       children: <Widget>[
-        Container(
-          //Background
-          decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                Color.fromRGBO(138, 35, 135, 1.0),
-                Color.fromRGBO(233, 64, 87, 1.0),
-                Color.fromRGBO(242, 113, 33, 1.0),
-              ])),
-        ),
-        Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Container(
-                width: width * 0.8,
-                height: height * 0.8,
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    boxShadow: [
-                      BoxShadow(
-                          color: Colors.black.withOpacity(0.4),
-                          blurRadius: 5.0,
-                          spreadRadius: 1.0)
-                    ]),
-                child: GestureDetector(
-                  onPanDown: (details) {
-                    this.setState(() {
-                      points.add(DrawingArea(
-                          point: details.localPosition,
-                          areaPaint: Paint()
-                            ..strokeCap = StrokeCap.round
-                            ..isAntiAlias = true
-                            ..color = selectedColor
-                            ..strokeWidth = strokeWidth));
-                    });
-                  },
-                  onPanUpdate: (details) {
-                    this.setState(() {
-                      points.add(DrawingArea(
-                          point: details.localPosition,
-                          areaPaint: Paint()
-                            ..strokeCap = StrokeCap.round
-                            ..isAntiAlias = true
-                            ..color = selectedColor
-                            ..strokeWidth = strokeWidth));
-                    });
-                  },
-                  onPanEnd: (details) {
-                    this.setState(() {
-                      points.add(null);
-                    });
-                  },
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                    child: CustomPaint(
-                      painter: MyCustomPainter(points: points),
+        OrientationBuilder(builder: (context, orientation) {
+          print(orientation);
+          return Container(
+            // Background
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: orientation == Orientation.portrait
+                      ? AssetImage("lib/images/background.jpg")
+                      : AssetImage("lib/images/background-landscape.jpg"),
+                  fit: BoxFit.cover),
+            ),
+          );
+        }),
+        Padding(
+            padding: const EdgeInsets.only(left: 40.0),
+            child: Container(
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    width: width * 0.6,
+                    height: height * 0.8,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        boxShadow: [
+                          BoxShadow(
+                              color: Colors.black.withOpacity(0.4),
+                              blurRadius: 5.0,
+                              spreadRadius: 1.0)
+                        ]),
+                    child: GestureDetector(
+                      onPanDown: (details) {
+                        this.setState(() {
+                          points.add(DrawingArea(
+                              point: details.localPosition,
+                              areaPaint: Paint()
+                                ..strokeCap = StrokeCap.round
+                                ..isAntiAlias = true
+                                ..color = selectedColor
+                                ..strokeWidth = strokeWidth));
+                        });
+                      },
+                      onPanUpdate: (details) {
+                        this.setState(() {
+                          points.add(DrawingArea(
+                              point: details.localPosition,
+                              areaPaint: Paint()
+                                ..strokeCap = StrokeCap.round
+                                ..isAntiAlias = true
+                                ..color = selectedColor
+                                ..strokeWidth = strokeWidth));
+                        });
+                      },
+                      onPanEnd: (details) {
+                        this.setState(() {
+                          points.add(null);
+                        });
+                      },
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                        child: CustomPaint(
+                          painter: MyCustomPainter(points: points),
+                        ),
+                      ),
                     ),
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Container(
-                // Tools container
-                width: width * 0.8,
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
-                ),
-                child: Row(children: <Widget>[
-                  IconButton(
-                      icon: Icon(Icons.color_lens, color: selectedColor),
-                      onPressed: () {
-                        selectColor();
-                      }),
-                  Expanded(
-                      child: Slider(
-                          min: 1.0,
-                          max: 7.0,
-                          activeColor: selectedColor,
-                          value: strokeWidth,
-                          onChanged: (value) {
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    // Tools container
+                    width: width * 0.6,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                    ),
+                    child: Row(children: <Widget>[
+                      IconButton(
+                          icon: Icon(Icons.color_lens, color: selectedColor),
+                          onPressed: () {
+                            selectColor();
+                          }),
+                      Expanded(
+                          child: Slider(
+                              min: 1.0,
+                              max: 7.0,
+                              activeColor: selectedColor,
+                              value: strokeWidth,
+                              onChanged: (value) {
+                                this.setState(() {
+                                  strokeWidth = value;
+                                });
+                              })),
+                      IconButton(
+                          icon: Icon(Icons.layers_clear),
+                          onPressed: () {
                             this.setState(() {
-                              strokeWidth = value;
+                              points.clear();
                             });
-                          })),
-                  IconButton(
-                      icon: Icon(Icons.layers_clear),
-                      onPressed: () {
-                        this.setState(() {
-                          points.clear();
-                        });
-                      }),
-                ]),
+                          }),
+                    ]),
+                  ),
+                ],
               ),
-            ],
-          ),
-        )
+            ))
       ],
     ));
   }
