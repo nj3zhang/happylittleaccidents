@@ -169,7 +169,53 @@ class _CanvasState extends State<CanvasWidget> {
                   ),
                 ],
               ),
-            ))
+            )),
+        Container(
+          height: height,
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Container(
+                      width: 250,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(
+                                "lib/images/paintings/painting-1.jpg"),
+                            fit: BoxFit.fitWidth),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    )),
+              ),
+              SizedBox(
+                height: 130,
+              ),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: EdgeInsets.only(right: 100),
+                  child: Container(
+                    width: 100,
+                    height: 40,
+                    child: ElevatedButton(
+                        child: Text('Submit'),
+                        onPressed: () {},
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Color.fromRGBO(233, 118, 97, 1)),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(38.0),
+                            )))),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     ));
   }
