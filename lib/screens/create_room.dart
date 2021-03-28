@@ -63,20 +63,12 @@ class _CreateRoomState extends State<CreateRoom> {
                     color: Colors.deepOrangeAccent,
                     child: Text('Start Game', style: TextStyle(color: Colors.white)),
                     onPressed: () async {
-                      // create new user
-
-
-
-
-
-                      //if(_formKey.currentState.validate()){
                         // signs in the user with a random id
                         dynamic result = await _auth.signInAnon();
                         User current_user = result;
                         // now we need to set the values for the new user
                         gameid = widget.roomID;
                         _userdb.updateUserData(name, gameid, avatar);
-
                         // navigate to waiting room
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => WaitingRoom()));
                       //}

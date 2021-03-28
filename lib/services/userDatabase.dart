@@ -21,13 +21,10 @@ class UserDatabaseService {
 
   Future updateUserData(String name, String gameid, int avatar) async {
 
-    String snip = gameid.substring(0, 4);
-
     return await userCollection.document(uid).setData({
       'name' : name,
-      'gameid': snip,
+      'gameid': gameid,
       'avatar': avatar,
-      'game_ref': gameid
     });
   }
 
