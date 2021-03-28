@@ -36,8 +36,8 @@ class _HomeState extends State<Home> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
             WelcomeWindowPlus(),
-            JoinRoom(),
-            CreateRoom()
+            JoinRoomBtn(),
+            CreateRoomBtn()
           ]))
     ]));
   }
@@ -62,8 +62,8 @@ class WelcomeWindowPlus extends StatelessWidget {
   }
 }
 
-class JoinRoom extends StatelessWidget {
-  JoinRoom();
+class JoinRoomBtn extends StatelessWidget {
+  JoinRoomBtn();
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +89,8 @@ class JoinRoom extends StatelessWidget {
   }
 }
 
-class CreateRoom extends StatelessWidget {
-  CreateRoom();
+class CreateRoomBtn extends StatelessWidget {
+  CreateRoomBtn();
 
   @override
   Widget build(BuildContext context) {
