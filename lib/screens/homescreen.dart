@@ -5,7 +5,7 @@ import 'package:hla/screens/join_room.dart';
 import 'package:hla/services/roomDatabase.dart';
 import 'package:hla/screens/game_page.dart';
 import 'package:flutter/services.dart';
-
+import 'package:hla/models/background.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -24,52 +24,99 @@ class _HomeState extends State<Home> {
   }
 
   Widget build(BuildContext context) {
-    return Container(
-      // Background
-      decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage("lib/images/background.jpg"), fit: BoxFit.cover),
-      ),
+    return Scaffold(
+        body: Stack(children: <Widget>[
+      BackgroundImg(),
+      Center(
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+            WelcomeWindowPlus(),
+            JoinRoomBtn(),
+            CreateRoomBtn()
+          ]))
+    ]));
+  }
+}
 
-      child: Column(
-        children: <Widget>[
-          // Welcome photo
-          Padding(
-            padding: const EdgeInsets.only(top: 110.0),
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("lib/images/WelcomeWindowPlus.png"),
-                    fit: BoxFit.cover),
-              ),
-              height: 437,
-              width: 331,
-            ),
+class WelcomeWindowPlus extends StatelessWidget {
+  WelcomeWindowPlus();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: const EdgeInsets.only(top: 110.0),
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("lib/images/WelcomeWindowPlus.png"),
+                fit: BoxFit.cover),
           ),
+          height: 437,
+          width: 331,
+        ));
+  }
+}
 
-          RaisedButton(
-            child: Text('Join Room'),
+class JoinRoomBtn extends StatelessWidget {
+  JoinRoomBtn();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(top: 35.0),
+      child: Container(
+        child: FloatingActionButton.extended(
+            backgroundColor: Color.fromARGB(255, 233, 118, 97),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(38)),
+            label: Text("JOIN ROOM",
+                style: TextStyle(fontSize: 20, fontFamily: 'Roboto')),
+            elevation: 10.0,
+
             onPressed: () {
               print('join room has been pressed');
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => JoinRoom()));
+
             },
           ),
-          RaisedButton(
-            child: Text('Create Room'),
-              onPressed: () async {
+        height: 63,
+        width: 331,
+      ),
+    );
+  }
+}
+
+class CreateRoomBtn extends StatelessWidget {
+  CreateRoomBtn();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+
+      padding: const EdgeInsets.only(top: 35.0),
+      child: Container(
+        child: FloatingActionButton.extended(
+            backgroundColor: Color.fromARGB(255, 233, 118, 97),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(38)),
+            label: Text("CREATE ROOM",
+                style: TextStyle(fontSize: 20, fontFamily: 'Roboto')),
+            elevation: 10.0,
+            onPressed: () async {
               // create instance of a new room
               final RoomDatabaseService _roomdb = RoomDatabaseService();
               // we need to keep track of the document id
               // we wait until the db entry is done and ask for the id to confirm
               String gameID = await _roomdb.getRoomID();
               print('New room created. ID: $gameID');
-
               print('create room has been pressed');
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateRoom(gameID)));
             },
-          )
-        ],
+          ),
+        height: 63,
+        width: 331,
       ),
     );
   }
