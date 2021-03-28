@@ -55,9 +55,17 @@ flutter:
    - lib/images/background-landscape.jpg
    - lib/images/WelcomeWindowPlus.png
    - lib/images/paintings/painting-1.jpg
-
-
-
+   - lib/images/EnterRoomKey.png
+   - lib/images/WindowLong.png
+   - lib/images/icon1.png
+   - lib/images/icon2.png
+   - lib/images/icon3.png
+   - lib/images/icon4.png
+   - lib/images/icon5.png
+   - lib/images/icon6.png
+   - lib/images/icon7.png
+   - lib/images/icon8.png
+   - lib/images/icon9.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
