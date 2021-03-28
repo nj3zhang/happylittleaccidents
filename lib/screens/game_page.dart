@@ -11,10 +11,21 @@ class _GameState extends State<GamePage> {
   @override
   Widget build(BuildContext context) {
     final double height = MediaQuery.of(context).size.height;
+    final double width = MediaQuery.of(context).size.width;
 
     return Container(
-        child: Column(
-      children: <Widget>[Container(height: height, child: CanvasWidget())],
-    ));
+        width: width,
+        height: height,
+        child: Row(
+          children: [
+            Container(
+                child: Column(
+              children: <Widget>[
+                Container(height: height, width: width, child: CanvasWidget())
+              ],
+            )),
+            Container(),
+          ],
+        ));
   }
 }

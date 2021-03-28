@@ -65,7 +65,6 @@ class _CanvasState extends State<CanvasWidget> {
         body: Stack(
       children: <Widget>[
         OrientationBuilder(builder: (context, orientation) {
-          print(orientation);
           return Container(
             // Background
             decoration: BoxDecoration(

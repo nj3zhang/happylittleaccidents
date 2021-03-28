@@ -10,7 +10,7 @@ class UserDatabaseService {
   UserDatabaseService({this.name, this.uid, this.gameid});
 
   // refrences to specific database collections
-  final CollectionReference userCollection = Firestore.instance.collection('Users');
+  final CollectionReference userCollection = FirebaseFirestore.instance.collection('Users');
 
 
   Future getUserData() async {
