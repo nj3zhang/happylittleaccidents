@@ -5,6 +5,7 @@ import 'package:hla/screens/join_room.dart';
 import 'package:hla/services/roomDatabase.dart';
 import 'package:hla/screens/game_page.dart';
 import 'package:flutter/services.dart';
+import 'package:hla/models/background.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -25,12 +26,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(children: <Widget>[
-      Container(
-          // Background
-          decoration: BoxDecoration(
-        image: DecorationImage(
-            image: AssetImage("lib/images/background.jpg"), fit: BoxFit.cover),
-      )),
+      BackgroundImg(),
       Center(
           child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -113,7 +109,8 @@ class CreateRoomBtn extends StatelessWidget {
               //print('New room created. ID: $gameID');
 
               print('create room has been pressed');
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateRoom("")));
+              Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => CreateRoom("")));
             }),
         height: 63,
         width: 331,

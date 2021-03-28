@@ -34,8 +34,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   firebase: ^7.3.0
-  cloud_firestore: ^0.13.6
-  firebase_auth: ^0.16.1
+  cloud_firestore: ^0.16.0+1
+  firebase_auth: ^0.20.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -54,9 +54,17 @@ flutter:
    - lib/images/background.jpg
    - lib/images/background-landscape.jpg
    - lib/images/WelcomeWindowPlus.png
-
-
-
+   - lib/images/EnterRoomKey.png
+   - lib/images/WindowLong.png
+   - lib/images/icon1.png
+   - lib/images/icon2.png
+   - lib/images/icon3.png
+   - lib/images/icon4.png
+   - lib/images/icon5.png
+   - lib/images/icon6.png
+   - lib/images/icon7.png
+   - lib/images/icon8.png
+   - lib/images/icon9.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
