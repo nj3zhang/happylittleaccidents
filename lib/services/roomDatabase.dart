@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:hla/models/currentUser.dart';
 import 'package:hla/models/user.dart';
 import 'dart:math';
 
@@ -37,6 +38,26 @@ class RoomDatabaseService {
 
     final docRef = await roomCollection.document(room_key).setData({'players' : 1,});
     return docRef;
+  }
+
+  Future addUser(String uid) async {
+    return await roomCollection.document(gameid).collection('users').document('uid');
+  }
+
+
+  List<CurrentUser> _currentUserListFromSnapshot(QuerySnapshot snapshot) {
+    return snapshot.documents.map((doc){
+      return CurrentUser(
+        name: doc.data['name'] ?? '',
+        avatar: doc.data['avatar'] ?? 1
+      );
+    }).toList();
+  }
+
+  /// getting our user streams
+  Stream<List<CurrentUser>> get users {
+    return roomCollection.document(gameid).collection('users').snapshots()
+        .map(_currentUserListFromSnapshot);
   }
 
 }

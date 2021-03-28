@@ -20,12 +20,12 @@ class UserDatabaseService {
   }
 
   Future updateUserData(String name, String gameid, int avatar) async {
-
-    return await userCollection.document(uid).setData({
+    final docRef = await userCollection.document(uid).setData({
       'name' : name,
       'gameid': gameid,
       'avatar': avatar,
     });
+
   }
 
 }

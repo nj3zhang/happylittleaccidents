@@ -2,6 +2,7 @@ import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:hla/screens/waiting_room.dart';
 import 'package:hla/services/auth.dart';
+import 'package:hla/services/roomDatabase.dart';
 import 'package:hla/services/userDatabase.dart';
 import 'package:hla/models/user.dart';
 
@@ -21,7 +22,7 @@ class _CreateRoomState extends State<CreateRoom> {
   final UserAuth _auth = UserAuth();
   // creates refrence to user instance in the database (so we can manipulate it)
   final UserDatabaseService _userdb = UserDatabaseService();
-
+  final RoomDatabaseService _roomdb = RoomDatabaseService();
 
   // for validation purposes
   final _formKey = GlobalKey<FormState>();
@@ -65,10 +66,11 @@ class _CreateRoomState extends State<CreateRoom> {
                     onPressed: () async {
                         // signs in the user with a random id
                         dynamic result = await _auth.signInAnon();
-                        User current_user = result;
                         // now we need to set the values for the new user
                         gameid = widget.roomID;
                         _userdb.updateUserData(name, gameid, avatar);
+                        String userid = _userdb.getUserData().toString();
+                        _roomdb.addUser(userid);
                         // navigate to waiting room
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => WaitingRoom()));
                       //}

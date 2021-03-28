@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hla/screens/waiting_room.dart';
 import 'package:hla/services/auth.dart';
+import 'package:hla/services/roomDatabase.dart';
 import 'package:hla/services/userDatabase.dart';
 import 'package:hla/models/user.dart';
 
@@ -21,6 +22,7 @@ class _JoinRoomState extends State<JoinRoom> {
   final UserAuth _auth = UserAuth();
   // creates refrence to user instance in the database (so we can manipulate it)
   final UserDatabaseService _userdb = UserDatabaseService();
+  final RoomDatabaseService _roomdb = RoomDatabaseService();
 
   @override
   Widget build(BuildContext context) {
@@ -62,9 +64,10 @@ class _JoinRoomState extends State<JoinRoom> {
                     onPressed: () async {
                       // signs in the user with a random id
                       dynamic result = await _auth.signInAnon();
-                      User current_user = result;
                       // now we need to set the values for the new user
                       _userdb.updateUserData(name, gameid, avatar);
+                      String userid = _userdb.getUserData().toString();
+                      _roomdb.addUser(userid);
                       // navigate to waiting room
                       Navigator.of(context).push(MaterialPageRoute(builder: (context) => WaitingRoom()));
                       //}
