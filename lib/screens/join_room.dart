@@ -15,9 +15,6 @@ class _JoinRoomState extends State<JoinRoom> {
 
       //check if you can join game
 
-
-
-
     );
   }
 }

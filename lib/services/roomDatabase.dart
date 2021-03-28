@@ -26,7 +26,8 @@ class RoomDatabaseService {
   // creates new game room
   Future newRoom() async{
     final docRef = await roomCollection.add({'players' : 1,});
-    //print(docRef.documentID);
+    print(docRef.documentID);
+    return docRef.documentID;
   }
 
 }

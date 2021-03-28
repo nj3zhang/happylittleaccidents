@@ -8,6 +8,13 @@ class WaitingRoom extends StatefulWidget {
 class _WaitingRoomState extends State<WaitingRoom> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      child: Text('Waiting for everyone to join'),
+
+      // create user id
+
+      //check if you can join game
+
+    );
   }
 }

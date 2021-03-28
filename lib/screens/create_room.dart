@@ -40,6 +40,7 @@ class _CreateRoomState extends State<CreateRoom> {
       body: Stack(
         children: <Widget>[
           Container(
+            padding: EdgeInsets.only(top: 200.0),
             /// GRIDDDDDDD -> AVATARS
             /// Anda will fix this ~~~~ magic powers ~~~~~~~~~~
             child: Text('AVATARS')
@@ -63,7 +64,12 @@ class _CreateRoomState extends State<CreateRoom> {
                     child: Text('Start Game', style: TextStyle(color: Colors.white)),
                     onPressed: () async {
                       // create new user
-                      if(_formKey.currentState.validate()){
+
+
+
+
+
+                      //if(_formKey.currentState.validate()){
                         // signs in the user with a random id
                         dynamic result = await _auth.signInAnon();
                         User current_user = result;
@@ -73,7 +79,7 @@ class _CreateRoomState extends State<CreateRoom> {
 
                         // navigate to waiting room
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => WaitingRoom()));
-                      }
+                      //}
                       // navigate to waiting room
                     },
                   )

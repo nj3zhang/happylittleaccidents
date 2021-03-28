@@ -14,12 +14,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage("images/background.jpg"),
-                fit: BoxFit.cover
-            ),
-        ),
+
       // this is how we are structuring our elements on the screen
         child: Column(
           children: <Widget>[
