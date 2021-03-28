@@ -10,8 +10,8 @@ import 'package:hla/models/avatarIcons.dart';
 
 class CreateRoom extends StatefulWidget {
   // how we pass variables from one screen to another
-  final String roomID;
-  CreateRoom(this.roomID);
+  //final String roomID;
+  CreateRoom();
 
   @override
   _CreateRoomState createState() => _CreateRoomState();
@@ -51,16 +51,9 @@ class _CreateRoomState extends State<CreateRoom> {
               width: 331,
               child: Column(
                 children: [
+                  SelectYourAvatar(),
                   Padding(
-                      padding: const EdgeInsets.only(top: 100.0),
-                      child: Text("Select your avatar",
-                          style:
-                              TextStyle(fontSize: 20, fontFamily: 'Roboto'))),
-                              Padding(
-                      padding: const EdgeInsets.only(top: 30.0),child:
-                  AvatarContainer()),
-                  Padding(
-                      padding: const EdgeInsets.only(top: 30.0),
+                      padding: const EdgeInsets.only(top: 40.0),
                       child: Text("Username:",
                           style:
                               TextStyle(fontSize: 20, fontFamily: 'Roboto'))),
@@ -68,7 +61,6 @@ class _CreateRoomState extends State<CreateRoom> {
                       padding:
                           const EdgeInsets.only(top: 30.0, left: 65, right: 65),
                       child: TextField(
-                          obscureText: true,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
                             hintText: "John Doe",
@@ -98,48 +90,29 @@ class EnterBtn extends StatelessWidget {
             backgroundColor: Color.fromARGB(255, 233, 118, 97),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(38)),
-            label: Text("JOIN ROOM",
+            label: Text("CREATE ROOM",
                 style: TextStyle(fontSize: 20, fontFamily: 'Roboto')),
             elevation: 10.0,
             onPressed: () async {
               // create new user
-/*
-                      //if(_formKey.currentState.validate()){
-                        // signs in the user with a random id
-                        dynamic result = await _auth.signInAnon();
-                        User current_user = result;
-                        // now we need to set the values for the new user
-                        gameid = widget.roomID;
-                        _userdb.updateUserData(name, gameid, avatar);
 
-                        // navigate to waiting room
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context) => WaitingRoom()));
-                      //}*/
+              //if(_formKey.currentState.validate()){
+              // signs in the user with a random id
+              /*dynamic result = await _auth.signInAnon();
+              User current_user = result;
+              // now we need to set the values for the new user
+              gameid = widget.roomID;
+              _userdb.updateUserData(name, gameid, avatar);*/
+
+              // navigate to waiting room
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => WaitingRoom()));
+              //}
               // navigate to waiting room
             }),
         height: 63,
         width: 331,
       ),
     );
-  }
-}
-
-class AvatarBtn extends StatelessWidget {
-  AvatarBtn();
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: 35.0),
-    );
-  }
-}
-
-class AvatarContainer extends StatelessWidget {
-  AvatarContainer();
-
-  @override
-  Widget build(BuildContext context) {
-    return AvatarSelector();
   }
 }
