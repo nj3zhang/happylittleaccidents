@@ -36,8 +36,8 @@ class _HomeState extends State<Home> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
             WelcomeWindowPlus(),
-            JoinRoom(),
-            CreateRoom()
+            JoinRoomBtn(),
+            CreateRoomBtn()
           ]))
     ]));
   }
@@ -62,8 +62,8 @@ class WelcomeWindowPlus extends StatelessWidget {
   }
 }
 
-class JoinRoom extends StatelessWidget {
-  JoinRoom();
+class JoinRoomBtn extends StatelessWidget {
+  JoinRoomBtn();
 
   @override
   Widget build(BuildContext context) {
@@ -89,8 +89,8 @@ class JoinRoom extends StatelessWidget {
   }
 }
 
-class CreateRoom extends StatelessWidget {
-  CreateRoom();
+class CreateRoomBtn extends StatelessWidget {
+  CreateRoomBtn();
 
   @override
   Widget build(BuildContext context) {
@@ -109,11 +109,11 @@ class CreateRoom extends StatelessWidget {
               final RoomDatabaseService _roomdb = RoomDatabaseService();
               // we need to keep track of the document id
               // we wait until the db entry is done and ask for the id to confirm
-              String gameID = await _roomdb.getRoomID();
-              print('New room created. ID: $gameID');
+              //String gameID = await _roomdb.getRoomID();
+              //print('New room created. ID: $gameID');
 
               print('create room has been pressed');
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateRoom(gameID)));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateRoom("")));
             }),
         height: 63,
         width: 331,
