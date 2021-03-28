@@ -1,6 +1,7 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
+import 'package:hla/screens/game_page.dart';
 import 'package:hla/screens/waiting_room.dart';
 import 'package:hla/services/auth.dart';
 import 'package:hla/services/userDatabase.dart';
@@ -19,9 +20,9 @@ class CreateRoom extends StatefulWidget {
 
 class _CreateRoomState extends State<CreateRoom> {
   // this helps us create temp user instances in the database
-  final UserAuth _auth = UserAuth();
-  // creates refrence to user instance in the database (so we can manipulate it)
-  final UserDatabaseService _userdb = UserDatabaseService();
+  // final UserAuth _auth = UserAuth();
+  // // creates refrence to user instance in the database (so we can manipulate it)
+  // final UserDatabaseService _userdb = UserDatabaseService();
 
   // for validation purposes
   final _formKey = GlobalKey<FormState>();
@@ -56,9 +57,9 @@ class _CreateRoomState extends State<CreateRoom> {
                       child: Text("Select your avatar",
                           style:
                               TextStyle(fontSize: 20, fontFamily: 'Roboto'))),
-                              Padding(
-                      padding: const EdgeInsets.only(top: 30.0),child:
-                  AvatarContainer()),
+                  Padding(
+                      padding: const EdgeInsets.only(top: 30.0),
+                      child: AvatarContainer()),
                   Padding(
                       padding: const EdgeInsets.only(top: 30.0),
                       child: Text("Username:",
@@ -102,15 +103,18 @@ class EnterBtn extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontFamily: 'Roboto')),
             elevation: 10.0,
             onPressed: () async {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => GamePage()));
               // create new user
 /*
+
                       //if(_formKey.currentState.validate()){
-                        // signs in the user with a random id
-                        dynamic result = await _auth.signInAnon();
-                        User current_user = result;
-                        // now we need to set the values for the new user
-                        gameid = widget.roomID;
-                        _userdb.updateUserData(name, gameid, avatar);
+                      // signs in the user with a random id
+                      // dynamic result = await _auth.signInAnon();
+                      // User current_user = result;
+                      // // now we need to set the values for the new user
+                      // gameid = widget.roomID;
+                      // _userdb.updateUserData(name, gameid, avatar);
 
                         // navigate to waiting room
                         Navigator.of(context).push(MaterialPageRoute(builder: (context) => WaitingRoom()));

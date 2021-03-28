@@ -121,3 +121,5 @@ app.*.symbols
 ios/Runner.xcodeproj/project.pbxproj
 ios/Flutter/Release.xcconfig
 Podfile
+ios/Flutter/Debug.xcconfig
+ios/Flutter/Release.xcconfig
