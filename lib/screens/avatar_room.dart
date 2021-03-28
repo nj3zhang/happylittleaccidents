@@ -1,7 +1,6 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
-import 'package:hla/screens/game_page.dart';
 import 'package:hla/screens/waiting_room.dart';
 import 'package:hla/services/auth.dart';
 import 'package:hla/services/userDatabase.dart';
@@ -9,20 +8,21 @@ import 'package:hla/models/user.dart';
 import 'package:hla/models/background.dart';
 import 'package:hla/models/avatarIcons.dart';
 
-class CreateRoom extends StatefulWidget {
+class AvatarRoom extends StatefulWidget {
   // how we pass variables from one screen to another
   //final String roomID;
-  CreateRoom();
+  AvatarRoom();
 
   @override
-  _CreateRoomState createState() => _CreateRoomState();
+  _AvatarRoomState createState() => _AvatarRoomState();
 }
 
-class _CreateRoomState extends State<CreateRoom> {
+class _AvatarRoomState extends State<AvatarRoom> {
   // this helps us create temp user instances in the database
-  // final UserAuth _auth = UserAuth();
-  // // creates refrence to user instance in the database (so we can manipulate it)
-  // final UserDatabaseService _userdb = UserDatabaseService();
+
+  final UserAuth _auth = UserAuth();
+  // creates refrence to user instance in the database (so we can manipulate it)
+  final UserDatabaseService _userdb = UserDatabaseService();
 
   // for validation purposes
   final _formKey = GlobalKey<FormState>();
@@ -54,7 +54,7 @@ class _CreateRoomState extends State<CreateRoom> {
                 children: [
                   SelectYourAvatar(),
                   Padding(
-                      padding: const EdgeInsets.only(top: 40.0),
+                      padding: const EdgeInsets.only(top: 30.0),
                       child: Text("Username:",
                           style:
                               TextStyle(fontSize: 20, fontFamily: 'Roboto'))),
@@ -91,12 +91,10 @@ class EnterBtn extends StatelessWidget {
             backgroundColor: Color.fromARGB(255, 233, 118, 97),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(38)),
-            label: Text("CREATE ROOM",
+            label: Text("JOIN ROOM",
                 style: TextStyle(fontSize: 20, fontFamily: 'Roboto')),
             elevation: 10.0,
             onPressed: () async {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => GamePage()));
               // create new user
 
               //if(_formKey.currentState.validate()){

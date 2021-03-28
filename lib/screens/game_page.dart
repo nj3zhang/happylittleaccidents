@@ -24,7 +24,6 @@ class _GameState extends State<GamePage> {
                 Container(height: height, width: width, child: CanvasWidget())
               ],
             )),
-            Container(),
           ],
         ));
   }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hla/models/background.dart';
+import 'package:hla/screens/avatar_room.dart';
 
 class JoinRoom extends StatefulWidget {
   @override
@@ -68,7 +69,10 @@ class EnterBtn extends StatelessWidget {
             label: Text("ENTER",
                 style: TextStyle(fontSize: 20, fontFamily: 'Roboto')),
             elevation: 10.0,
-            onPressed: () async {}),
+            onPressed: () async {
+              Navigator.of(context)
+                  .push(MaterialPageRoute(builder: (context) => AvatarRoom()));
+            }),
         height: 63,
         width: 331,
       ),

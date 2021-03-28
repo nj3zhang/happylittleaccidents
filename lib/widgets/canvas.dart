@@ -2,10 +2,20 @@ import 'package:flutter/material.dart';
 import 'dart:ui';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:flutter/services.dart';
+import 'package:hla/models/active-users.dart';
 
 class CanvasWidget extends StatefulWidget {
   @override
   _CanvasState createState() => _CanvasState();
+}
+
+class AvatarContainer extends StatelessWidget {
+  AvatarContainer();
+
+  @override
+  Widget build(BuildContext context) {
+    return AvatarSelector();
+  }
 }
 
 class DrawingArea {
@@ -169,7 +179,57 @@ class _CanvasState extends State<CanvasWidget> {
                   ),
                 ],
               ),
-            ))
+            )),
+        Container(
+          height: height,
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.topRight,
+                child: Padding(
+                    padding: EdgeInsets.all(20),
+                    child: Container(
+                      width: 250,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage(
+                                "lib/images/paintings/painting-1.jpg"),
+                            fit: BoxFit.fitWidth),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    )),
+              ),
+              Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 40),
+                    child: SizedBox(
+                        height: 130, width: 300, child: AvatarContainer()),
+                  )),
+              Align(
+                alignment: Alignment.bottomRight,
+                child: Padding(
+                  padding: EdgeInsets.only(right: 100),
+                  child: Container(
+                    width: 100,
+                    height: 40,
+                    child: ElevatedButton(
+                        child: Text('Submit'),
+                        onPressed: () {},
+                        style: ButtonStyle(
+                            backgroundColor: MaterialStateProperty.all<Color>(
+                                Color.fromRGBO(233, 118, 97, 1)),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(38.0),
+                            )))),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
       ],
     ));
   }

@@ -63,12 +63,6 @@ class _AvatarSelectorState extends State<AvatarSelector> {
         Color.fromARGB(255, 249, 233, 168), "lib/images/icon5.png", false));
     avatars.add(new Avatar(
         Color.fromARGB(255, 250, 194, 184), "lib/images/icon6.png", false));
-    avatars.add(new Avatar(
-        Color.fromARGB(255, 171, 209, 189), "lib/images/icon7.png", false));
-    avatars.add(new Avatar(
-        Color.fromARGB(255, 166, 183, 225), "lib/images/icon8.png", false));
-    avatars.add(new Avatar(
-        Color.fromARGB(255, 72, 231, 202), "lib/images/icon9.png", false));
 
     avatar1.add(avatars[0]);
     avatar1.add(avatars[1]);
@@ -76,9 +70,6 @@ class _AvatarSelectorState extends State<AvatarSelector> {
     avatar2.add(avatars[3]);
     avatar2.add(avatars[4]);
     avatar2.add(avatars[5]);
-    avatar3.add(avatars[6]);
-    avatar3.add(avatars[7]);
-    avatar3.add(avatars[8]);
   }
 
   @override
@@ -86,8 +77,8 @@ class _AvatarSelectorState extends State<AvatarSelector> {
     return Column(
       children: [
         SizedBox(
-            height: 60.0,
-            width: 240,
+            height: 50.0,
+            width: 260,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
@@ -110,8 +101,8 @@ class _AvatarSelectorState extends State<AvatarSelector> {
                       ]));
                 })),
         SizedBox(
-            height: 60.0,
-            width: 240,
+            height: 50.0,
+            width: 260,
             child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
@@ -133,47 +124,7 @@ class _AvatarSelectorState extends State<AvatarSelector> {
                         CustomRadio(avatar2[index])
                       ]));
                 })),
-        SizedBox(
-            height: 60.0,
-            width: 240,
-            child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                shrinkWrap: true,
-                itemCount: 3,
-                itemBuilder: (context, index) {
-                  return InkWell(
-                      focusColor: Colors.pinkAccent,
-                      onTap: () {
-                        setState(() {
-                          avatars
-                              .forEach((avatar) => avatar.isSelected = false);
-                          avatar3[index].isSelected = true;
-                        });
-                      },
-                      child: Row(children: [
-                        Padding(
-                            padding: const EdgeInsets.only(
-                                right: 24, top: 24, bottom: 24)),
-                        CustomRadio(avatar3[index])
-                      ]));
-                }))
       ],
     );
-  }
-}
-
-class SelectYourAvatar extends StatelessWidget {
-  SelectYourAvatar();
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(children: [
-      Padding(
-          padding: const EdgeInsets.only(top: 110.0),
-          child: Text("Select your avatar",
-              style: TextStyle(fontSize: 20, fontFamily: 'Roboto'))),
-      Padding(
-          padding: const EdgeInsets.only(top: 30.0), child: AvatarSelector())
-    ]);
   }
 }
