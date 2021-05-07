@@ -33,16 +33,9 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-<<<<<<< HEAD
-  firebase: ^7.3.0
-  cloud_firestore: ^0.13.6
-  firebase_auth: ^0.16.1
-  provider: ^4.2.0
-=======
     firebase: ^7.3.0
     cloud_firestore: ^0.13.6
     firebase_auth: ^0.16.1
->>>>>>> main
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
