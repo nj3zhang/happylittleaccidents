@@ -72,15 +72,15 @@ class ActiveAvatars extends StatelessWidget {
         body: Container(
           child: Text('Waiting for everyone to join'),
         ),
-      )
-    return Padding(
+      );
+    /*return Padding(
       padding: const EdgeInsets.only(top: 0.0),
       child: Container(
           
           // height: 260,
           // width: 200,
           ),
-    );
+    );*/
   }
 }
 

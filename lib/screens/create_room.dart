@@ -79,7 +79,7 @@ class _CreateRoomState extends State<CreateRoom> {
                 ],
               ),
             )),
-        EnterBtn(widget.roomID)
+        EnterBtn()
       ])),
     ]));
   }
@@ -87,8 +87,8 @@ class _CreateRoomState extends State<CreateRoom> {
 
 class EnterBtn extends StatelessWidget {
 
-  final String roomID;
-  EnterBtn(this.roomID);
+  //final String roomID;
+  EnterBtn();
 
   // this helps us create temp user instances in the database
   final UserAuth _auth = UserAuth();
@@ -123,7 +123,7 @@ class EnterBtn extends StatelessWidget {
               // signs in the user with a random id
               dynamic result = await _auth.signInAnon();
               // now we need to set the values for the new user
-              gameid = roomID;
+              //gameid = roomID;
               _userdb.updateUserData(name, gameid, avatar);
               String userid = _userdb.getUserData().toString();
               _roomdb.addUser(userid);

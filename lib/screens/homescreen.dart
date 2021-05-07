@@ -112,7 +112,7 @@ class CreateRoomBtn extends StatelessWidget {
               String gameID = await _roomdb.getRoomID();
               print('New room created. ID: $gameID');
               print('create room has been pressed');
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateRoom(gameID)));
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateRoom()));
             },
           ),
         height: 63,
