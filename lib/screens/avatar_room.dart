@@ -1,34 +1,28 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
-import 'package:hla/screens/game_page.dart';
 import 'package:hla/screens/waiting_room.dart';
 import 'package:hla/services/auth.dart';
-import 'package:hla/services/roomDatabase.dart';
 import 'package:hla/services/userDatabase.dart';
 import 'package:hla/models/user.dart';
 import 'package:hla/models/background.dart';
 import 'package:hla/models/avatarIcons.dart';
 
-class CreateRoom extends StatefulWidget {
+class AvatarRoom extends StatefulWidget {
   // how we pass variables from one screen to another
   //final String roomID;
-  CreateRoom();
+  AvatarRoom();
 
   @override
-  _CreateRoomState createState() => _CreateRoomState();
+  _AvatarRoomState createState() => _AvatarRoomState();
 }
 
-
-
-
-class _CreateRoomState extends State<CreateRoom> {
+class _AvatarRoomState extends State<AvatarRoom> {
   // this helps us create temp user instances in the database
+
   final UserAuth _auth = UserAuth();
   // creates refrence to user instance in the database (so we can manipulate it)
   final UserDatabaseService _userdb = UserDatabaseService();
-  final RoomDatabaseService _roomdb = RoomDatabaseService();
-
 
   // for validation purposes
   final _formKey = GlobalKey<FormState>();
@@ -60,7 +54,7 @@ class _CreateRoomState extends State<CreateRoom> {
                 children: [
                   SelectYourAvatar(),
                   Padding(
-                      padding: const EdgeInsets.only(top: 40.0),
+                      padding: const EdgeInsets.only(top: 30.0),
                       child: Text("Username:",
                           style:
                               TextStyle(fontSize: 20, fontFamily: 'Roboto'))),
@@ -79,33 +73,14 @@ class _CreateRoomState extends State<CreateRoom> {
                 ],
               ),
             )),
-        EnterBtn(widget.roomID)
+        EnterBtn()
       ])),
     ]));
   }
 }
 
 class EnterBtn extends StatelessWidget {
-
-  final String roomID;
-  EnterBtn(this.roomID);
-
-  // this helps us create temp user instances in the database
-  final UserAuth _auth = UserAuth();
-  // creates refrence to user instance in the database (so we can manipulate it)
-  final UserDatabaseService _userdb = UserDatabaseService();
-  final RoomDatabaseService _roomdb = RoomDatabaseService();
-
-
-  // for validation purposes
-  final _formKey = GlobalKey<FormState>();
-
-  // variable definitions
-  String name = '';
-  int avatar = 1; // for now
-  String uid = '';
-  String gameid = '';
-
+  EnterBtn();
 
   @override
   Widget build(BuildContext context) {
@@ -116,20 +91,10 @@ class EnterBtn extends StatelessWidget {
             backgroundColor: Color.fromARGB(255, 233, 118, 97),
             shape:
                 RoundedRectangleBorder(borderRadius: BorderRadius.circular(38)),
-            label: Text("CREATE ROOM",
+            label: Text("JOIN ROOM",
                 style: TextStyle(fontSize: 20, fontFamily: 'Roboto')),
             elevation: 10.0,
             onPressed: () async {
-              // signs in the user with a random id
-              dynamic result = await _auth.signInAnon();
-              // now we need to set the values for the new user
-              gameid = roomID;
-              _userdb.updateUserData(name, gameid, avatar);
-              String userid = _userdb.getUserData().toString();
-              _roomdb.addUser(userid);
-
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => GamePage()));
               // create new user
 
               //if(_formKey.currentState.validate()){

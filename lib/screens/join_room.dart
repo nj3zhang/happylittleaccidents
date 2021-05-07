@@ -4,6 +4,7 @@ import 'package:hla/services/auth.dart';
 import 'package:hla/services/roomDatabase.dart';
 import 'package:hla/services/userDatabase.dart';
 import 'package:hla/models/background.dart';
+import 'package:hla/screens/avatar_room.dart';
 
 import 'game_page.dart';
 

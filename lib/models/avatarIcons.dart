@@ -102,7 +102,12 @@ class _AvatarSelectorState extends State<AvatarSelector> {
                           avatars[index].isSelected = true;
                         });
                       },
-                      child: Row(children: [Padding(padding: const EdgeInsets.only(right:24, top:24, bottom:24)),CustomRadio(avatar1[index])]));
+                      child: Row(children: [
+                        Padding(
+                            padding: const EdgeInsets.only(
+                                right: 24, top: 24, bottom: 24)),
+                        CustomRadio(avatar1[index])
+                      ]));
                 })),
         SizedBox(
             height: 60.0,
@@ -121,7 +126,12 @@ class _AvatarSelectorState extends State<AvatarSelector> {
                           avatar2[index].isSelected = true;
                         });
                       },
-                      child: Row(children: [Padding(padding: const EdgeInsets.only(right:24, top:24, bottom:24)),CustomRadio(avatar2[index])]));
+                      child: Row(children: [
+                        Padding(
+                            padding: const EdgeInsets.only(
+                                right: 24, top: 24, bottom: 24)),
+                        CustomRadio(avatar2[index])
+                      ]));
                 })),
         SizedBox(
             height: 60.0,
@@ -140,9 +150,30 @@ class _AvatarSelectorState extends State<AvatarSelector> {
                           avatar3[index].isSelected = true;
                         });
                       },
-                      child: Row(children: [Padding(padding: const EdgeInsets.only(right:24, top:24, bottom:24)),CustomRadio(avatar3[index])]));
+                      child: Row(children: [
+                        Padding(
+                            padding: const EdgeInsets.only(
+                                right: 24, top: 24, bottom: 24)),
+                        CustomRadio(avatar3[index])
+                      ]));
                 }))
       ],
     );
+  }
+}
+
+class SelectYourAvatar extends StatelessWidget {
+  SelectYourAvatar();
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      Padding(
+          padding: const EdgeInsets.only(top: 110.0),
+          child: Text("Select your avatar",
+              style: TextStyle(fontSize: 20, fontFamily: 'Roboto'))),
+      Padding(
+          padding: const EdgeInsets.only(top: 30.0), child: AvatarSelector())
+    ]);
   }
 }
