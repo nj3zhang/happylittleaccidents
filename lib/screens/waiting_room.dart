@@ -1,4 +1,4 @@
-import 'dart:html';
+//import 'dart:html';
 import 'package:hla/models/currentUser.dart';
 import 'package:hla/services/roomDatabase.dart';
 import 'package:provider/provider.dart';
@@ -72,7 +72,7 @@ class ActiveAvatars extends StatelessWidget {
         body: Container(
           child: Text('Waiting for everyone to join'),
         ),
-      );
+      ));
     /*return Padding(
       padding: const EdgeInsets.only(top: 0.0),
       child: Container(
