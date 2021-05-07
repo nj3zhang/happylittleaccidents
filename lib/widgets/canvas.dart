@@ -5,91 +5,90 @@ import 'package:flutter/services.dart';
 import 'package:hla/models/active-users.dart';
 
 class CanvasWidget extends StatefulWidget {
-  @override
-  _CanvasState createState() => _CanvasState();
+@override
+_CanvasState createState() => _CanvasState();
 }
 
 class AvatarContainer extends StatelessWidget {
-  AvatarContainer();
+AvatarContainer();
 
-  @override
-  Widget build(BuildContext context) {
-    return AvatarSelector();
-  }
+@override
+Widget build(BuildContext context) {
+return AvatarSelector();
+}
 }
 
 class DrawingArea {
-  Offset point;
-  Paint areaPaint;
+Offset point;
+Paint areaPaint;
 
-  DrawingArea({this.point, this.areaPaint});
+DrawingArea({this.point, this.areaPaint});
 }
 
 class _CanvasState extends State<CanvasWidget> {
-  List<DrawingArea> points = [];
-  Color selectedColor;
-  double strokeWidth;
+List<DrawingArea> points = [];
+Color selectedColor;
+double strokeWidth;
 
-  @override
-  void initState() {
-    super.initState();
-    selectedColor = Colors.black;
-    strokeWidth = 2.0;
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.landscapeLeft,
-      DeviceOrientation.landscapeRight,
-    ]);
-  }
+@override
+void initState() {
+super.initState();
+selectedColor = Colors.black;
+strokeWidth = 2.0;
+SystemChrome.setPreferredOrientations([
+DeviceOrientation.landscapeLeft,
+DeviceOrientation.landscapeRight,
+]);
+}
 
-  void selectColor() {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) => AlertDialog(
-        title: const Text('Color Chooser'),
-        content: SingleChildScrollView(
-          child: BlockPicker(
-            pickerColor: selectedColor,
-            onColorChanged: (color) {
-              this.setState(() {
-                selectedColor = color;
-              });
-            },
-          ),
-        ),
-        actions: <Widget>[
-          TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text("Close"))
-        ],
-      ),
-    );
-  }
+void selectColor() {
+showDialog(
+context: context,
+builder: (BuildContext context) => AlertDialog(
+title: const Text('Color Chooser'),
+content: SingleChildScrollView(
+child: BlockPicker(
+pickerColor: selectedColor,
+onColorChanged: (color) {
+this.setState(() {
+selectedColor = color;
+});
+},
+),
+),
+actions: <Widget>[
+TextButton(
+onPressed: () {
+Navigator.of(context).pop();
+},
+child: Text("Close"))
+],
+),
+);
+}
 
-  @override
-  Widget build(BuildContext context) {
-    final double width = MediaQuery.of(context).size.width;
-    final double height = MediaQuery.of(context).size.height;
-    return Scaffold(
-        body: Stack(
-      children: <Widget>[
-        OrientationBuilder(builder: (context, orientation) {
-          return Container(
-            // Background
-            decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: orientation == Orientation.portrait
-                      ? AssetImage("lib/images/background.jpg")
-                      : AssetImage("lib/images/background-landscape.jpg"),
-                  fit: BoxFit.cover),
-            ),
-          );
-        }),
-        Padding(
-            padding: const EdgeInsets.only(left: 40.0),
-            child: Container(
-              child: Column(
+@override
+Widget build(BuildContext context) {
+final double width = MediaQuery.of(context).size.width;
+final double height = MediaQuery.of(context).size.height;
+return Scaffold(
+body: Stack(
+children: <Widget>[
+OrientationBuilder(builder: (context, orientation) {
+return Container(
+// Background
+decoration: BoxDecoration(
+image: DecorationImage(
+image: orientation == Orientation.portrait
+? AssetImage("lib/images/background.jpg")
+    : AssetImage("lib/images/background-landscape.jpg"),
+fit: BoxFit.cover),
+),
+);
+}),
+Padding(
+padding: const EdgeInsets.only(left: 40.0),
+child: Container(
                 children: <Widget>[
                   SizedBox(
                     height: 10,

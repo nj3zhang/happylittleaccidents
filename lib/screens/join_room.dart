@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:hla/screens/waiting_room.dart';
+import 'package:hla/services/auth.dart';
+import 'package:hla/services/roomDatabase.dart';
+import 'package:hla/services/userDatabase.dart';
 import 'package:hla/models/background.dart';
 import 'package:hla/screens/avatar_room.dart';
+
+import 'game_page.dart';
+
 
 class JoinRoom extends StatefulWidget {
   @override
@@ -8,6 +15,20 @@ class JoinRoom extends StatefulWidget {
 }
 
 class _JoinRoomState extends State<JoinRoom> {
+
+  // variable declarations
+  String name = '';
+  int avatar = 1; // for now
+  String uid = '';
+  String gameid = ''; // will be entered by the user
+
+
+  // this helps us create temp user instances in the database
+  final UserAuth _auth = UserAuth();
+  // creates refrence to user instance in the database (so we can manipulate it)
+  final UserDatabaseService _userdb = UserDatabaseService();
+  final RoomDatabaseService _roomdb = RoomDatabaseService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,19 +64,38 @@ class _JoinRoomState extends State<JoinRoom> {
                         ),
                         onSubmitted: (String value) {
                           print('Value saved as "$value"');
+                          gameid = value;
                         }))
               ],
             ),
           ),
         ),
-        Padding(child: EnterBtn(), padding: const EdgeInsets.only(top: 35.0))
+        Padding(child: EnterBtn(gameid), padding: const EdgeInsets.only(top: 35.0))
       ]))
     ]));
   }
 }
 
 class EnterBtn extends StatelessWidget {
-  EnterBtn();
+  final String roomID;
+  EnterBtn(this.roomID);
+
+  // this helps us create temp user instances in the database
+  final UserAuth _auth = UserAuth();
+  // creates refrence to user instance in the database (so we can manipulate it)
+  final UserDatabaseService _userdb = UserDatabaseService();
+  final RoomDatabaseService _roomdb = RoomDatabaseService();
+
+
+  // for validation purposes
+  final _formKey = GlobalKey<FormState>();
+
+  // variable definitions
+  String name = '';
+  int avatar = 1; // for now
+  String uid = '';
+  String gameid = '';
+
 
   @override
   Widget build(BuildContext context) {
@@ -70,11 +110,17 @@ class EnterBtn extends StatelessWidget {
                 style: TextStyle(fontSize: 20, fontFamily: 'Roboto')),
             elevation: 10.0,
             onPressed: () async {
-              Navigator.of(context)
-                  .push(MaterialPageRoute(builder: (context) => AvatarRoom()));
+                  dynamic result = await _auth.signInAnon();
+                  // now we need to set the values for the new user
+                  _userdb.updateUserData(name, gameid, avatar);
+                  String userid = _userdb.getUserData().toString();
+                  _roomdb.addUser(userid);
+
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => GamePage()));
             }),
         height: 63,
         width: 331,
+
       ),
     );
   }

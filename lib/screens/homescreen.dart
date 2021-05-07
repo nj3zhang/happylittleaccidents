@@ -73,11 +73,14 @@ class JoinRoomBtn extends StatelessWidget {
             label: Text("JOIN ROOM",
                 style: TextStyle(fontSize: 20, fontFamily: 'Roboto')),
             elevation: 10.0,
+
             onPressed: () {
               print('join room has been pressed');
               Navigator.of(context)
                   .push(MaterialPageRoute(builder: (context) => JoinRoom()));
-            }),
+
+            },
+          ),
         height: 63,
         width: 331,
       ),
@@ -91,6 +94,7 @@ class CreateRoomBtn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
+
       padding: const EdgeInsets.only(top: 35.0),
       child: Container(
         child: FloatingActionButton.extended(
@@ -105,12 +109,12 @@ class CreateRoomBtn extends StatelessWidget {
               final RoomDatabaseService _roomdb = RoomDatabaseService();
               // we need to keep track of the document id
               // we wait until the db entry is done and ask for the id to confirm
-              //String gameID = await _roomdb.getRoomID();
-              //print('New room created. ID: $gameID');
-
+              String gameID = await _roomdb.getRoomID();
+              print('New room created. ID: $gameID');
               print('create room has been pressed');
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateRoom()));
-            }),
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => CreateRoom(gameID)));
+            },
+          ),
         height: 63,
         width: 331,
       ),

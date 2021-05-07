@@ -1,4 +1,9 @@
+import 'dart:html';
+import 'package:hla/models/currentUser.dart';
+import 'package:hla/services/roomDatabase.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import 'package:hla/services/currentUserList.dart';
 import 'package:flutter/services.dart';
 import 'package:hla/models/background.dart';
 import 'package:hla/screens/game_page.dart';
@@ -61,6 +66,13 @@ class ActiveAvatars extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return StreamProvider <List<CurrentUser>>.value(
+      value: RoomDatabaseService().users,
+      child: Scaffold(
+        body: Container(
+          child: Text('Waiting for everyone to join'),
+        ),
+      )
     return Padding(
       padding: const EdgeInsets.only(top: 0.0),
       child: Container(
